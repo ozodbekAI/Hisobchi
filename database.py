@@ -28,5 +28,7 @@ class Database:
         self.cursor.execute("UPDATE users SET count=?  WHERE channnel_id=? AND user_id=?", (new_count, channel_id, user_id))
         self.connection.commit()
 
-    
+    def get_top_user(self, chat_id):
+        result = self.cursor.execute("SELECT * FROM users WHERE channnel_id=? ORDER BY count DESC LIMIT 10", (chat_id,))
+        return result.fetchall()
 
